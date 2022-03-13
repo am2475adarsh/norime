@@ -35,43 +35,61 @@
               <li class="nav-item dropdown btn-group">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="mydropdown" href="#">Contact Us</a>
 
-                <div class="dropdown-menu p-4 dropdown-menu-dark dropstart dropdown-menu-end" style="min-width: 450px;"
-                  aria-labelledby="mydropdown">
-                  <!-- <li><h6 class="dropdown-header">Send us an email to contact us,</h6></li> -->
-                  <div class="mb-3">
-
-                    <label for="myform" class="form-label dark fs-4 fw-bold">Send us an Email to contact us! :D</label>
-                    <br>
-                    <label for="exampleDropdownFormEmail2" id="myform" class="form-label dark">Email address </label>
-                    <input type="email" class="form-control" id="exampleDropdownFormEmail2"
-                      placeholder="email@example.com">
-                  </div>
-
-                  <div class="mb-3">
-                    <!-- <label for="textarea" class="form-label">Your Message</label>
-                          <input type="text" class="form-control" style="height:100px;" id="textarea" placeholder="Write something for us,"> -->
-                    <label for="exampleFormControlTextarea1" class="form-label">Your Message</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                      placeholder="Write something for us,"></textarea>
-
-                  </div>
-
-                  <button type="submit" class="btn btn-primary">Send</button>
-
+                <div class="rowinp row mb-3 mx-auto" id="email-input">
+                  <label for="exampleInputEmail1" class="col-3 text-start form-label email_label">Email :</label>
+                  <div class="col-9"><input type="email" class="form-control" name="email" id="email"
+                      placeholder="Enter email" required class="email"></div>
                 </div>
+                <div class="rowinp row my-3 mx-auto" id="name-input">
+                  <label for="names" class="col-3 text-start form-label name_label">Name :</label>
+                  <div class="col-9"><input class="form-control" type="text" name="names" id="name"
+                      placeholder="Enter your name" required class="name"></div>
+                </div>
+                <div class="rowinp row my-3 mx-auto" id="pass-input">
+                  <label class="col-3 text-start form-label password_label">Password :</label>
+                  <div class="col-9"><input type="password" class="form-control" name="passwords" id="password"
+                      placeholder="Enter Password" required class="password"></div>
+                </div>
+                <div class="rowinp row my-3 mx-auto" id="confirm-pass-input">
+                  <label class="col-3 text-start form-label confirm_password_label">Retype Pass :</label>
+                  <div class="col-9"><input type="password" class="form-control" name="confirm_passwords"
+                      id="confirm_password" placeholder="Retype Password" required class="confirm_password"></div>
+                </div>
+                <button id="submit" class="rowsub mt-3 btn btn-primary submit" onclick="signout()">Submit</button>
+                <br><br>
+                <button id="showSection" class="rowsub btn btn-primary">Click here to signin</button>
 
-              </li>
-
-              <li class="nav-item">
-                <button type="button" id="logout" class="btn btn-outline-light"><a href="index.html">Logout</a></button>
-                <!-- <a class="nav-link" href="#">About Us</a> -->
-              </li>
-
-            </ul>
+                <label for="myform" class="form-label dark fs-4 fw-bold">Send us an Email to contact us! :D</label>
+                <br>
+                <label for="exampleDropdownFormEmail2" id="myform" class="form-label dark">Email address </label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
           </div>
+
+          <div class="mb-3">
+            <!-- <label for="textarea" class="form-label">Your Message</label>
+                          <input type="text" class="form-control" style="height:100px;" id="textarea" placeholder="Write something for us,"> -->
+            <label for="exampleFormControlTextarea1" class="form-label">Your Message</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+              placeholder="Write something for us,"></textarea>
+
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send</button>
+
         </div>
-      </nav>
+
+        </li>
+
+        <li class="nav-item">
+          <button type="button" id="logout" class="btn btn-outline-light"><a href="index.html">Logout</a></button>
+          <!-- <a class="nav-link" href="#">About Us</a> -->
+        </li>
+
+        </ul>
     </div>
+  </div>
+  </nav>
+  </div>
   </div>
 
   <div class="main">
