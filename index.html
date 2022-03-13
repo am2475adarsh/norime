@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="kindpng_4854874.ico" type="image/x-icon">
+  <title>LoggIt</title>
+</head>
+
+<body>
+  <div class="top">
+    <div class="mynav">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="clipart1572251.png" alt="heh" width="100px" />
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <p class="nav-link" id="showUser">Hi user</p>
+              </li>
+
+              <li class="nav-item dropdown btn-group">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="mydropdown" href="#">Contact Us</a>
+
+                <div class="dropdown-menu p-4 dropdown-menu-dark dropstart dropdown-menu-end" style="min-width: 450px;"
+                  aria-labelledby="mydropdown">
+                  <!-- <li><h6 class="dropdown-header">Send us an email to contact us,</h6></li> -->
+                  <div class="mb-3">
+
+                    <label for="myform" class="form-label dark fs-4 fw-bold">Send us an Email to contact us! :D</label>
+                    <br>
+                    <label for="exampleDropdownFormEmail2" id="myform" class="form-label dark">Email address </label>
+                    <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                      placeholder="email@example.com">
+                  </div>
+
+                  <div class="mb-3">
+                    <!-- <label for="textarea" class="form-label">Your Message</label>
+                          <input type="text" class="form-control" style="height:100px;" id="textarea" placeholder="Write something for us,"> -->
+                    <label for="exampleFormControlTextarea1" class="form-label">Your Message</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                      placeholder="Write something for us,"></textarea>
+
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Send</button>
+
+                </div>
+
+              </li>
+
+              <li class="nav-item">
+                <button type="button" id="logout" class="btn btn-outline-light"><a href="index.html">Logout</a></button>
+                <!-- <a class="nav-link" href="#">About Us</a> -->
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- Signin / Signup section -->
+    <div class="container-lg box" id="containerShow">
+
+      <h1 class="display-4 mb-5" id="heading" style="color: greenyellow">Sign-up</h1>
+
+      <div class="container-sm p-5">
+
+        <div class="rowinp row mb-3 mx-auto" id="email-input">
+          <label for="exampleInputEmail1" class="col-3 text-start form-label email_label">Email :</label>
+          <div class="col-9"><input type="email" class="form-control" name="email" id="email" placeholder="Enter email"
+              required class="email"></div>
+        </div>
+        <div class="rowinp row my-3 mx-auto" id="name-input">
+          <label for="names" class="col-3 text-start form-label name_label">Name :</label>
+          <div class="col-9"><input class="form-control" type="text" name="names" id="name"
+              placeholder="Enter your name" required class="name"></div>
+        </div>
+        <div class="rowinp row my-3 mx-auto" id="pass-input">
+          <label class="col-3 text-start form-label password_label">Password :</label>
+          <div class="col-9"><input type="password" class="form-control" name="passwords" id="password"
+              placeholder="Enter Password" required class="password"></div>
+        </div>
+        <div class="rowinp row my-3 mx-auto" id="confirm-pass-input">
+          <label class="col-3 text-start form-label confirm_password_label">Retype Pass :</label>
+          <div class="col-9"><input type="password" class="form-control" name="confirm_passwords" id="confirm_password"
+              placeholder="Retype Password" required class="confirm_password"></div>
+        </div>
+        <button id="submit" class="rowsub mt-3 btn btn-primary submit">Submit</button>
+        <br><br>
+        <button id="showSection" class="rowsub btn btn-primary">Click here to signin</button>
+
+      </div>
+      <iframe id="iframe" src="https://verify-2041-uudarv.twil.io/index.html"
+        title="W3Schools Free Online Web Tutorials" height="600" width="100%"></iframe>
+      <!-- Remove the iframe -->
+    </div>
+    <!-- Signin / Signup section ends -->
+    <!-- Expense tracker main section -->
+    <div class="container-lg box" id="expenseTracker">
+      <h1 class="display-4">LoggIt - Expenses</h1>
+      <div class="h3 ms-5 mt-5 text-start" id="balance">Balance: 0</div>
+
+      <div class="input-group pt-5 ps-5 pe-5">
+        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+        <input type="text" id="expenseName" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+
+      <div class="input-group mb-3 p-5">
+        <span class="input-group-text" id="inputGroup-sizing-default">Amount</span>
+        <input type="text" id="expenseAmount" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+
+      <div class="btns row justify-content-evenly">
+        <div class="col-6"><button type="button" class="btn btn-primary btn-lg btn1"
+            onclick="deposit()">Deposit</button></div>
+        <div class="col-6"><button type="button" class="btn btn-danger btn-lg btn2"
+            onclick="withdraw()">Withdraw</button></div>
+      </div>
+
+      <div class="accordion my-5" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Transaction History
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body" id="transaction">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Expense tracker main section ends -->
+  <div class="bottom">
+    <div class="fs-5">About Us
+      <hr>
+    </div>
+    <br>
+    <div class="d-flex justify-content-around">
+      <a class="nav-link text-white-50"
+        href="https://www.canva.com/design/DAE6wigyBLs/xROpL6lfA8SK6m8RRjQRpw/view?utm_content=DAE6wigyBLs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Presentation</a>
+      <a class="nav-link text-white-50" href="https://hackowasp.live/">HackOWasp 4.0</a>
+      <a class="nav-link text-white-50"
+        href="https://github.com/parthikdas/norime">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GitHub</a>
+    </div>
+    <br>
+    <p class="copyright">© 2022 LoggIt</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
