@@ -1,102 +1,398 @@
+const express = require("express")
+const app = express()
+const client = require('twilio')('AC4f2845bcdab84555e7247887677fc617', 'bd5acb4c6a91614d88c265c8a00b2c10');
+
+const port = 3001
+app.get('/', (req, res) => {
+    sendTextMessage();
+    res.send(`
+    <h1>Your message has been sent successfully!</h1>
+    <h2>Hello there!</h2>
+    `);
+})
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
+
+function sendTextMessage() {
+
+    const number = Math.trunc(Math.random() * 9000) + 1;
+    console.log(number);
+    client.messages.create({
+        body: `Aapki saari amaanat ab meri huehuehue!
+         Yo zubu here aapka piglet🐷, test karne ke liye aapko bhej rha hu OTP darr mat jaana ${number}`,
+        to: '+917044063114',
+        from: '+16692813093'
+    }).then(message => console.log(message))
+        // here you can implement your fallback code
+        .catch(error => console.log(error))
+
+}
+
+
+//https://verify1-6942-lqmec6.twil.io/index.html
+
+//Solution 1: 
+Host the website and then link the verify1 OTP page with the hosted page if otp verification successful
+
+//Solution 2:
+Use the above code for generating OTP, although we can't send OTP to any device since the number needs to manually verified in the webpage through the portal which wouldn't be much efficient.
+
+
+index 
+--------------------------------------------------------------------
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <!-- <link rel='stylesheet' type='text/css' href='signup_style.css' /> -->
-<!-- <link rel="icon" href="logo.png" type="image/icon type"> -->
-</head>
-
-
-<div class="container">
-    <div>
-        <h4 class="Login" style="position: absolute; top: -17px;font-size:30px; left: 250px;  color: cornsilk">Sign-up
-        </h4>
-        <form class="sign-form">
-
-            <div style="color: crimson; position:absolute; top:130px;left:165px">
-
-            </div>
-
-            <div style="color: green; position:absolute; top:290px;left:210px">
-
-            </div>
-
-            <label for="Email" class="email_label">Email :</label>
-            <input type="text" name="email" class="email" required="required">
-            <div class="red-text-email">
-
-            </div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Number Verification</title>
+    <link
+      rel="icon"
+      href="https://drive.google.com/file/d/1riVkUDLVDwt7ZXkvTF5j9_1VherJ0SP0/view?usp=sharing"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://twilio-labs.github.io/function-templates/static/v1/ce-paste-theme.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/css/intlTelInput.min.css"
+      integrity="sha256-xpVuhxDPR39wFEQDha4W7kuMx+z9Av3dTS8MbH/RWEU="
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/js/intlTelInput.min.js"
+      integrity="sha256-uPbemOnf3P4eaeLHebLwPC71YRbu3WNBvO4ibYeBnGs="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="page-top">
+      
     </div>
-    <div>
-        <label for="names" class="name_label">Name :</label>
-        <input type="text" name="names" class="name" required="required">
-        <div class="red-text-name">
-
+    <main>
+      <div class="content">
+        <section style="position: absolute; top: 17%; left:41%;">
+          <form id="send-code">
+            <p style="font-weight:bold;">Select your channel:</p>
+            <div>
+              <input
+                type="radio"
+                name="channel"
+                id="channel-sms"
+                value="sms"
+                checked
+              />
+              <label for="channel-sms" style="color: white;">SMS</label>
+            </div>
+           
+            <div id="phone-input">
+              <p style="font-weight:bold;">Enter your phone number:</p>
+              <input type="tel" id="phone_number" style="background: #b5dff7"/>
+            </div>
+            <p style="font-weight:bold;">Select your preferred language:</p>
+            <select id="select-language" style="background: #b5dff7"></select>
+            <br>
+            <!-- <button>Get a one-time passcode</button> -->
+            <input type="submit" class="get_otp" value="Get a one-time passcode" />
+            <span id="status" class="status"></span>
+          </form>
+        </section>
+        <section>
+          <div id="otp-modal">
+            <div class="modal-content">
+              <span id="close">&times;</span>
+              <form id="check-code">
+                <div>
+                  <p>Enter the code:</p>
+                  <input type="text" id="code" placeholder="123456" required />
+                </div>
+                <div>
+                  <input type="submit" value="Verify code" class="asubmit"/>
+                </div>
+                <span id="modal-status" class="status"></span>
+              </form>
+            </div>
+          </div>
+        </section>
+<form>
+    <div style="align-self: start; display: inline-block;">
+        <div style="display:flex; justify-content:center; padding:1rem 0;">
         </div>
     </div>
-    <div>
-        <label class="password_label">Password :</label>
-        <input type="password" name="passwords" class="password" required="required">
-        <div class="red-text-password">
-
-        </div>
-    </div>
-    <div>
-        <label class="confirm_password_label">Retype Pass :</label>
-        <input type="password" name="confirm_passwords" class="confirm_password" required="required">
-        <div class="red-text-password">
-
-        </div>
-    </div>
-    <div class="button">
-        <input name="submit" value="submit" class="submit">
-    </div>
-
-    <!-- <a href="login.html"
-        style="position: absolute; top: 470px;left: 230px;  color: black;font-size: 15px; display: inline; text-decoration: none;">
-        Click
-        here to &nbsp;<p style="color: aqua; display: inline; ">SIGN IN</p></a> -->
-    </form>
-</div>
-<script>
-    // const submit_button = document.querySelector('.submit');
-    const api = 'http://localhost:3000/data'
-    document.getElementById('submit').addEventListener('click', function () {
-        const user_name = document.getElementById('name');
-        const user_email = document.getElementById('email');
-        const user_password = document.getElementById('password');
-        const user_confirm_password = document.getElementById('confirm_password');
-        if (user_name.value && user_email.value && user_password.value && user_confirm_password.value) {
-            if (user_password.value == user_confirm_password.value) {
-
-                fetch("http://localhost:3000/data")
-                    .then(data => data.json())
-                    .then(data => {
-                        data.push({
-                            id: data.length,
-                            name: user_name.value,
-                            email: user_email.value,
-                            password: user_password.value
-                        })
-                        fetch("http://localhost:3000/data", {
-                            method: "POST",
-                            body: JSON.stringify(data)
-                        }).then(data => data.json()).then(data => console.log(data))
-                    })
-
-            } else {
-                alert("Password not same");
-                user_password.innerHTML = user_confirm_password.innerHTML = "";
-            }
-        }
+</form>
+      </div>
+    </main>
+  </body>
+  <script>
+    // Handle international prefixes, format phone input field
+    // Uses intl-tel-input library
+    const phoneInputField = document.querySelector("#phone_number");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+      // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+      preferredCountries: ["us", "co", "in", "de"],
+      utilsScript:
+        "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/js/utils.js",
     });
-</script>
 
+    function selectedChannel() {
+      const checked = "input[name='channel']:checked";
+      return document.querySelector(checked).value;
+    }
 
-</body>
+    const phoneInputDiv = document.getElementById("phone-input");
 
+    function showPhoneNumberInput() {
+      phoneInputDiv.style.display = "block";
+    }
+
+    const statusSpan = document.getElementById("status");
+    const modalStatusSpan = document.getElementById("modal-status");
+
+    function showModalStatus(message, options = {color: "gray"}) {
+      modalStatusSpan.style.color = options.color;
+      modalStatusSpan.textContent = message;
+    }
+
+    function showError(error) {
+      console.error(error);
+      showStatus(error, { color: "#a94442" });
+    }
+
+    function showStatus(message, options = { color: "gray" }) {
+      statusSpan.style.color = options.color;
+      statusSpan.textContent = message;
+    }
+
+    function clearStatus() {
+      statusSpan.textContent = "";
+      modalStatusSpan.textContent = "";
+    }
+
+    const modal = document.getElementById("otp-modal");
+    var to;
+
+    async function sendOtp(event) {
+      event.preventDefault();
+
+      const locale = document.getElementById("select-language").value;
+      const channel = selectedChannel();
+
+      let statusMessage =
+        channel == "call" ? "☎️ calling..." : "Sending verification code...";
+      showStatus(statusMessage);
+
+      to =
+        channel == "email"
+          ? document.getElementById("email").value
+          : phoneInput.getNumber();
+
+      const data = new URLSearchParams();
+      data.append("channel", channel);
+      data.append("locale", locale);
+      data.append("to", to);
+
+      try {
+        const response = await fetch("./start-verify", {
+          method: "POST",
+          body: data,
+        });
+
+        const json = await response.json();
+
+        if (response.status == 429) {
+          clearStatus();
+          modal.style.display = "block";
+          showModalStatus(
+            `You have attempted to verify '${to}' too many times. If you received a code, enter it in the form. Otherwise, please wait 10 minutes and try again.`,
+            {color: "#a94442"}
+          );
+        } else if (response.status >= 400) {
+          clearStatus();
+          showError(json.error);
+        } else {
+          modal.style.display = "block";
+          if (json.success) {
+            showStatus(`Sent verification code to ${to}`);
+          } else {
+            showError(json.error);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        showError(`Something went wrong while sending code to ${to}.`);
+      }
+    }
+
+    document
+      .getElementById("send-code")
+      .addEventListener("submit", (event) => sendOtp(event));
+
+    async function checkOtp(event) {
+      event.preventDefault();
+      let code = document.getElementById("code");
+      showModalStatus(`Checking code ${code.value}...`);
+
+      const data = new URLSearchParams();
+      data.append("to", to);
+      data.append("code", code.value);
+
+      try {
+        const response = await fetch("./check-verify", {
+          method: "POST",
+          body: data,
+        });
+
+        const json = await response.json();
+
+        if (json.success) {
+          showModalStatus("Verification success!", {color: "green"});
+          code.value = "";
+        } else {
+          showModalStatus("Incorrect token!", {color: "#a94442"});
+          code.value = "";
+        }
+      } catch (error) {
+        console.error(error);
+        showModalStatus("Something went wrong!");
+        code.value = "";
+      }
+    }
+
+    let checkCode = document.getElementById("check-code");
+    checkCode.addEventListener("submit", (event) => checkOtp(event));
+
+    let closeButton = document.getElementById("close");
+    closeButton.addEventListener("click", () => {
+      clearStatus();
+      modal.style.display = "none";
+    });
+
+    window.onclick = function (event) {
+      switch (event.target.id) {
+        case "otp-modal":
+          modal.style.display = "none";
+          clearStatus();
+          break;
+        case "channel-sms":
+          showPhoneNumberInput();
+          break;
+      }
+    };
+  </script>
+  <script src="locales.js"></script>
 </html>
+
+
+
+css-------------------------------------------------------
+
+body {
+	/* background: linear-gradient(-45deg, #69a9c2, #697ac2, #8b69c2, #b06fbd); */
+  background: transparent;
+	background-size: 200% 200%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+    overflow-y: hidden;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+main {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgb(0, 0, 0,0.7);
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 20%;
+}
+
+div.content {
+  max-width: 100%;
+}
+
+input,
+select {
+  font: inherit;
+  border: 1px solid rgb(102, 111, 136);
+  border-radius: 4px;
+  padding: 0.6rem;
+}
+
+.status {
+  margin-top: 1rem;
+}
+
+#otp-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+  position: relative;
+}
+
+#close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  float: right;
+  cursor: pointer;
+}
+
+#close:hover,
+#close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+p{
+  font-size: 16px;
+  color: white;
+}
+
+/* .asubmit:hover{
+  background-color: #e0b2f7;
+} */
+
+.get_otp:hover{
+  background-color: #e0b2f7;
+}
+
+
+
+
